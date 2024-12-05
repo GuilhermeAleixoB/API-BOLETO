@@ -10,7 +10,7 @@ const caminhoCertHttps = process.env.CAMINHO_CERT_HTTPS;
 const app = express();
 const port = process.env.PORTA;
 
-if (caminhoChaveHttps == null && caminhoCertHttps == null){
+if (!caminhoChaveHttps|| !caminhoCertHttps){
     routes(app);
 
     app.listen(port, () => console.log(`servidor está rodando na porta ${port}`));
