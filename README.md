@@ -37,4 +37,4 @@ CAMINHO_CERT_HTTPS=_
 
 ### Caso queira parar de executar ao iniciar o windows
 - Rodar o prompt: `pm2 delete all`
-- Rodar o prompt: `pm2 save`
+- Rodar o prompt: `pm2 save` 
