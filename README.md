@@ -14,14 +14,14 @@
 - Para instalar as dependências: `npm install`
 
 - Criar arquivo .ENV e configurar o banco e a Porta da API inserindo dentro dele:  
-PORTA=3000  
+_PORTA=3000  
 DB_USUARIO=usuario  
 DB_SENHA=senha  
 DB_HOST=127.0.0.1  
 DB_PORTA=0000  
 DB_NAME=nome_do_banco  
 CAMINHO_CHAVE_HTTPS=  
-CAMINHO_CERT_HTTPS=  
+CAMINHO_CERT_HTTPS=_
 
 ### Para iniciar a API
 - Rodar no prompt: `node index.js`
