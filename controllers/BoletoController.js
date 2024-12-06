@@ -1,5 +1,8 @@
 const banco = require('../db.js');
 const QRCode = require('qrcode');
+const { exec } = require('child_process');
+const path = require('path');
+
 
 class BoletoController {
   static async BoletoQRCode(req, res) {
@@ -42,6 +45,36 @@ class BoletoController {
       }
     }
   }
+
+  
+    static async BoletoSenha(req, res) {
+      const linkOri = req.get('linkOri'); // Caminho do PDF original
+      const linkDes = req.get('linkDes'); // Caminho do PDF destino com senha
+      const senha = req.get('senha'); // Senha para proteger o PDF
+      
+      if (!linkOri || !linkDes || !senha) {
+        return res.status(400).json({ message: 'Parâmetros incompletos. Certifique-se de enviar "linkOri", "linkDes" e "senha".' });
+      }
+      
+      const comando = `qpdf --encrypt  ${senha} ${senha} 256 -- "${linkOri}" "${linkDes}"`;
+      
+      const options = { windowsHide: true }; 
+      
+      exec(comando, options, (erro, stdout, stderr) => {
+    if (erro) {
+      console.error('Erro ao proteger o PDF:', erro.message);
+      return;
+    }
+    if (stderr) {
+      console.error('stderr:', stderr);
+      return;
+    }
+    console.log(`PDF protegido com sucesso em: ${linkDes}`);
+  });
+
+
+    }
+  
 }
 
 module.exports = BoletoController;
