@@ -47,33 +47,38 @@ class BoletoController {
   }
 
   
-    static async BoletoSenha(req, res) {
-      const linkOri = req.get('linkOri'); // Caminho do PDF original
-      const linkDes = req.get('linkDes'); // Caminho do PDF destino com senha
-      const senha = req.get('senha'); // Senha para proteger o PDF
-      
-      if (!linkOri || !linkDes || !senha) {
-        return res.status(400).json({ message: 'Parâmetros incompletos. Certifique-se de enviar "linkOri", "linkDes" e "senha".' });
+  static async BoletoSenha(req, res) {
+    
+    const { linkOri, linkDes, senha } = req.body; 
+  
+    // Validação de parâmetros
+    if (!linkOri || !linkDes || !senha) {
+      return res.status(400).json({ 
+        message: 'Parâmetros incompletos. Certifique-se de enviar "linkOri", "linkDes" e "senha".' 
+      });
+    }
+  
+    // Monta o comando do qpdf
+    const comando = `qpdf --encrypt ${senha} ${senha} 256 -- "${linkOri}" "${linkDes}"`;
+    
+    // Configuração para ocultar a janela do CMD no Windows
+    const options = { windowsHide: true };
+  
+    // Executa o comando
+    exec(comando, options, (erro, stdout, stderr) => {
+      if (erro) {
+        console.error('Erro ao proteger o PDF:', erro.message);
+        return res.status(500).json({ status: erro.message });
       }
-      
-      const comando = `qpdf --encrypt  ${senha} ${senha} 256 -- "${linkOri}" "${linkDes}"`;
-      
-      const options = { windowsHide: true }; 
-      
-      exec(comando, options, (erro, stdout, stderr) => {
-    if (erro) {
-      console.error('Erro ao proteger o PDF:', erro.message);
-      return;
-    }
-    if (stderr) {
-      console.error('stderr:', stderr);
-      return;
-    }
-    console.log(`PDF protegido com sucesso em: ${linkDes}`);
-  });
-
-
-    }
+      if (stderr) {      
+        console.error('stderr:', stderr);
+        return res.status(500).json({ status: stderr });
+      }
+  
+      console.log(`PDF protegido com sucesso em: ${linkDes}`);
+      return res.status(200).json({ status: "OK" });
+    });
+  }
   
 }
 
