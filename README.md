@@ -27,13 +27,8 @@ CAMINHO_CERT_HTTPS=_
 - Se a mensagem "servidor está rodando na porta" aparecer a API está funcionando corretamente 
 
 ### MANTENDO A API RODANDO APÓS REINICIALIZAÇÕES
-- Instalar o pm2-windows-startup: `npm install pm2-windows-startup -g`
-- Registrar a API para iniciar automaticamente: `pm2-startup install`
-- Salvar a configuração: `pm2 save`
-
-### INICIANDO A API USANDO O PM2
-- Utilizar o seguinte comando no terminal do Windows: `pm2 start index.js --name "API de Boletos" --watch`
-
-### PARANDO TODAS AS APIs EM EXECUÇÃO
-- Utilizar o seguinte comando no terminal do Windows: `pm2 delete all`
-- Utilizar o seguinte comando no terminal do Windows: `pm2 save`  
+- Instalar o PM2: `npm i pm2`
+- Colocar como Variável de sistema `PATH`, `caminho_da_api\node_modules\.bin`
+- Digitar `pm2` e verificar se foi criada na pasta da API uma pasta `.pm2`, caso não tenha sido criada a pasta ir no `C:\users\seu_usuario\.pm2` copiar e colar na pasta da API
+- Executar: `pm2 start index.js --name "API de Boletos"`
+- Executar: `pm2 save`
