@@ -1,19 +1,18 @@
-## Essa API é para obter um pix "copie e cola", transformar em um QRCODE e gravar em um campo de uma tabela do PostgreSQL (é o /boletoQRCode) ou recriar um pdf porem colocando senha nele usando o QPDF (é o /boletoSenha)
+## Esta API permite obter um pix "copie e cole", transformá-lo em um QRCODE e guardar em uma tabela do Banco de Dados PostgreSQL (/boletoQRCode) ou recriar um PDF com senha usando o QPDF (/boletoSenha)
 
-### INSTALAÇÃO:
-- Baixar o npm usando o comando no cmd do windows: `npm install -g npm`
+### INSTRUÇÕES DE INSTALAÇÃO:
+- Instalar o NPM usando o terminal do Windows: `npm install -g npm`
 - Baixar o node no link: https://nodejs.org/pt
-- Instalar o node em "Arquivos de Programas" (é o default)
-- Verificar a instalação usando `node -v` e `npm -v` no prompt (Em qualquer pasta)
-- Descompacta o arquivo api.zip (pode deixar essa pasta em qualquer lugar)
-- Para funcionar a senha no PDF precisa baixar o QPDF no link: https://sourceforge.net/projects/qpdf/files/
+- Verificar a instalação usando `node -v` e `npm -v` no terminal do Windows
+- Descompactar a API
+- Instalar o QPDF (necessário para a criação de PDF com senha) usando o link: https://sourceforge.net/projects/qpdf/files/
 
 
-### TODOS OS PRÓXIMOS PASSOS SÃO DENTRO DA PASTA DA API
+### CONFIGURAÇÕES DENTRO DA PASTA DA API
 
-- Para instalar as dependências: `npm install`
+- Instalar dependências usando o terminal do Windows: `npm install`
 
-- Criar arquivo .ENV e configurar o banco e a Porta da API inserindo dentro dele:  
+- Criar o arquivo .ENV seguindo o Exemplo:  
 _PORTA=3000  
 DB_USUARIO=usuario  
 DB_SENHA=senha  
@@ -23,18 +22,18 @@ DB_NAME=nome_do_banco
 CAMINHO_CHAVE_HTTPS=  
 CAMINHO_CERT_HTTPS=_
 
-### Para iniciar a API
-- Rodar no prompt: `node index.js`
-- Caso apareça "servidor está rodando na porta" é porque está certo
+### INICIANDO A API
+- Iniciar a API: `node index.js`
+- Se a mensagem "servidor está rodando na porta" aparecer a API está funcionando corretamente 
 
-### Para iniciar a API e deixar para mesmo ao reiniciar a máquina ou servidor a api reinicie junto
--Rodar o prompt: `pm2 start index.js --name "API de Boletos" --watch`
+### MANTENDO A API RODANDO APÓS REINICIALIZAÇÕES
+- Instalar o pm2-windows-startup: `npm install pm2-windows-startup -g`
+- Registrar a API para iniciar automaticamente: `pm2-startup install`
+- Salvar a configuração: `pm2 save`
 
-### Para deixar ele executar sempre ao iniciar o windows automaticamente
-- Rodar o prompt: `npm install pm2-windows-startup -g` (Apenas na primeira vez)
-- Rodar o prompt: `pm2-startup install`
-- Rodar o prompt: `pm2 save`
+### INICIANDO A API USANDO O PM2
+- Utilizar o seguinte comando no terminal do Windows: `pm2 start index.js --name "API de Boletos" --watch`
 
-### Caso queira parar de executar ao iniciar o windows
-- Rodar o prompt: `pm2 delete all`
-- Rodar o prompt: `pm2 save` 
+### PARANDO TODAS AS APIs EM EXECUÇÃO
+- Utilizar o seguinte comando no terminal do Windows: `pm2 delete all`
+- Utilizar o seguinte comando no terminal do Windows: `pm2 save`  
