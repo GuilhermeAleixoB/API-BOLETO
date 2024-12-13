@@ -32,3 +32,6 @@ CAMINHO_CERT_HTTPS=_
 - Digitar `pm2` e verificar se foi criada na pasta da API uma pasta `.pm2`, caso não tenha sido criada a pasta ir no `C:\users\seu_usuario\.pm2` copiar e colar na pasta da API
 - Executar: `pm2 start index.js --name "API de Boletos"`
 - Executar: `pm2 save`
+
+### MONITORAR A API
+- Executar: `pm2 monit`
