@@ -35,6 +35,8 @@ class BoletoController {
           await conexao.query(`UPDATE hpxsis.exe_boleto
                                SET bol_st_imgqrcode = $1
                                WHERE bol_in_sequencia = $2`, [buffer, cod]);
+
+          console.log(`QRCODE gerado no bol_in_sequencia "${cod}"`);
           return res.status(200).json({ status: "OK" });
         });
 
